@@ -1,23 +1,23 @@
 # Core dependencies for voice chat bot
-openai-whisper==20231117
-numpy<2.0.0
+openai-whisper>=20231117
+numpy>=1.24.0,<2.0.0
 torch>=2.0.0
 torchaudio>=2.0.0
 
 # Text-to-Speech
-pyttsx3==2.90
-gTTS==2.4.0
+pyttsx3>=2.90
+gTTS>=2.4.0
 
 # Vector database and embeddings for RAG
-chromadb==0.4.22
-sentence-transformers==2.3.1
+chromadb>=0.4.0
+sentence-transformers>=2.2.0
 
 # Audio processing
-sounddevice==0.4.6
-soundfile==0.12.1
-scipy==1.11.4
+sounddevice>=0.4.6
+soundfile>=0.12.1
+scipy>=1.11.0
 
 # Utilities
-python-dotenv==1.0.0
-pydantic==2.5.3
-pyyaml==6.0.1
+python-dotenv>=1.0.0
+pydantic>=2.5.0
+pyyaml>=6.0.0
