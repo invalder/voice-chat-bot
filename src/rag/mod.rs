@@ -239,7 +239,7 @@ impl RagSystem {
             .collect();
 
         // Sort by similarity descending
-        results.sort_by(|a, b| b.similarity.partial_cmp(&a.similarity).unwrap());
+        results.sort_by(|a, b| b.similarity.partial_cmp(&a.similarity).unwrap_or(std::cmp::Ordering::Equal));
 
         // Take top K
         results.truncate(top_k);
