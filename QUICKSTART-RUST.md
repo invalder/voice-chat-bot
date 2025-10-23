@@ -9,7 +9,11 @@ Get up and running with the Rust Voice Chat Bot in under 5 minutes!
 
 ```bash
 # Install Rust (if not already installed)
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o rustup-init.sh
+# (Optional) Review the installer script
+less rustup-init.sh
+# Run the installer
+sh rustup-init.sh
 ```
 
 ## Installation
