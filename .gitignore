@@ -43,6 +43,7 @@ audio_recordings/
 *.mp3
 knowledge_base/
 chroma_db/
+vector_db/
 .env
 
 # Model files
