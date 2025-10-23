@@ -139,7 +139,7 @@ fn run_interactive_chat(bot: &VoiceChatBot) -> Result<()> {
             continue;
         }
 
-        if query.eq_ignore_ascii_case("quit") || query.eq_ignore_ascii_case("exit") || query == "q"
+        if query.eq_ignore_ascii_case("quit") || query.eq_ignore_ascii_case("exit") || query.eq_ignore_ascii_case("q")
         {
             println!("Goodbye!");
             break;
