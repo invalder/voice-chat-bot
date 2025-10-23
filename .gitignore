@@ -50,3 +50,8 @@ models/
 *.pt
 *.pth
 *.bin
+
+
+# Added by cargo
+
+/target
