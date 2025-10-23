@@ -1,0 +1,22 @@
+# Speech-to-Text Configuration
+stt:
+  model_name: "tiny"  # Options: tiny, base, small, medium, large
+  language: "en"      # Language code for transcription
+
+# Text-to-Speech Configuration
+tts:
+  engine: "native"    # Options: native (OS TTS), gtts (Google TTS)
+  rate: 150           # Speech rate in words per minute
+
+# RAG (Retrieval-Augmented Generation) Configuration
+rag:
+  embedding_model: "all-MiniLM-L6-v2"  # Sentence transformer model
+  chunk_size: 500                       # Document chunk size in characters
+  chunk_overlap: 50                     # Overlap between chunks in characters
+  top_k: 3                              # Number of documents to retrieve
+  similarity_threshold: 0.7             # Minimum similarity score (0-1)
+
+# General Configuration
+knowledge_base_path: "knowledge_base"   # Path to knowledge base directory
+db_path: "vector_db"                    # Path to vector database storage
+expert_domain: "general"                # Expert domain identifier
