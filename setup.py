@@ -29,7 +29,7 @@ setup(
     python_requires=">=3.8",
     install_requires=[
         "openai-whisper>=20231117",
-        "numpy<2.0.0",
+        "numpy>=1.21.0",
         "torch>=2.0.0",
         "torchaudio>=2.0.0",
         "pyttsx3>=2.90",
