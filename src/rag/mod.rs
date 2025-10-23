@@ -172,9 +172,6 @@ impl RagSystem {
             }
 
             start = end.saturating_sub(overlap);
-            if start == end {
-                start = end;
-            }
         }
 
         chunks
