@@ -41,10 +41,13 @@ Thumbs.db
 audio_recordings/
 *.wav
 *.mp3
-knowledge_base/
 chroma_db/
 vector_db/
 .env
+
+# Allow example knowledge base
+!knowledge_base/
+!knowledge_base/*.txt
 
 # Model files
 models/
