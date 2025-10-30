@@ -1,0 +1,13 @@
+Voice Chat Bot Overview
+
+Voice Chat Bot is an advanced conversational AI system designed with three core principles that set it apart from traditional chatbots.
+
+First, the Zero Hallucination Guarantee. The bot uses a Retrieval-Augmented Generation (RAG) approach that ensures all responses are based solely on information in its knowledge base. The system will never generate false or misleading information. If the bot doesn't have information about a topic, it will explicitly state that it lacks the information rather than making up an answer.
+
+Second, Low Resource Consumption. The system is optimized to run efficiently on standard hardware without requiring expensive GPUs or large amounts of memory. It uses the Whisper "tiny" model for speech-to-text, which is only 39MB in size. For embeddings, it employs the lightweight all-MiniLM-L6-v2 model at 80MB. The vector database ChromaDB adds minimal overhead. The entire system runs in approximately 200MB of memory, making it suitable for deployment on modest hardware.
+
+Third, High Speed and Fast Response Times. The bot is engineered for low latency interactions. The Whisper tiny model processes approximately 5 seconds of audio in about 1 second. Query embeddings are generated in roughly 50 milliseconds using the MiniLM model. Vector search in ChromaDB takes less than 10 milliseconds. Response generation is template-based and completes in under 100 milliseconds. Text-to-speech with pyttsx3 takes around 500 milliseconds depending on text length. The total end-to-end response time is typically under 2 seconds.
+
+The system architecture consists of four main components. The Speech-to-Text module uses OpenAI's Whisper model to convert voice input to text. The RAG System performs vector-based retrieval of relevant information from the knowledge base. The Response Generator creates answers based strictly on retrieved documents. The Text-to-Speech module converts text responses back to voice output using pyttsx3 or gTTS.
+
+The bot supports flexible expert domains, allowing you to configure it for specific areas of knowledge such as customer support, medical information, technical documentation, or educational content. You maintain complete control over the knowledge base, ensuring accuracy and relevance for your use case.

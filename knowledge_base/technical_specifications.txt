@@ -1,0 +1,25 @@
+Voice Chat Bot Technical Specifications
+
+System Requirements:
+The Voice Chat Bot requires Python 3.8 or higher to run. It needs approximately 200MB of RAM for the base configuration. No GPU is required as all models are optimized for CPU execution. A microphone is optional and only needed for voice input functionality. Speakers or headphones are optional and only needed for voice output.
+
+Speech-to-Text Configuration:
+The system supports multiple Whisper model sizes. The "tiny" model is 39MB and provides the fastest processing at approximately 1 second for 5 seconds of audio. The "base" model offers improved accuracy with moderate speed. The "small" model provides high accuracy for more complex audio. The "medium" and "large" models are available for maximum accuracy when processing time is not critical. All models support multiple languages through the language configuration parameter.
+
+Text-to-Speech Options:
+Two TTS engines are supported. The pyttsx3 engine works completely offline and is built into the system. It provides immediate voice output with no network latency. The gTTS engine requires internet connectivity but offers more natural-sounding voices. The speech rate is configurable and defaults to 150 words per minute.
+
+RAG System Configuration:
+The embedding model all-MiniLM-L6-v2 is used by default for generating vector representations of text. Documents are split into chunks of 500 characters by default with a 50-character overlap between chunks to maintain context. The system retrieves the top 3 most relevant documents by default for each query. A similarity threshold of 0.7 (on a scale of 0 to 1) filters out irrelevant results.
+
+Vector Database:
+ChromaDB is used as the vector database backend. It provides persistent storage of embeddings and documents. The database supports cosine similarity for vector comparisons. It offers fast retrieval times of under 10 milliseconds for typical queries. The database is stored in the chroma_db directory by default.
+
+Performance Benchmarks:
+Speech-to-text with Whisper tiny processes 5 seconds of audio in approximately 1 second. Query embedding generation takes about 50 milliseconds. Vector search retrieval completes in less than 10 milliseconds. Response generation using templates takes under 100 milliseconds. Text-to-speech synthesis takes approximately 500 milliseconds depending on response length. The total end-to-end latency from voice input to voice output is typically under 2 seconds.
+
+Memory Usage Breakdown:
+The Whisper tiny model consumes approximately 50MB of RAM. The MiniLM embedding model uses around 100MB. ChromaDB has a base overhead of about 20MB. The Python runtime requires roughly 30MB. Additional memory is used for document storage based on knowledge base size. The total memory footprint is approximately 200MB for a basic configuration.
+
+Scalability Considerations:
+The knowledge base can scale to thousands of documents. Larger knowledge bases may require increased retrieval time and memory. The chunk_size and chunk_overlap parameters can be tuned for different document types. The top_k parameter controls how many documents are retrieved and affects response quality and speed.

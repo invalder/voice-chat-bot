@@ -118,7 +118,28 @@ pip install -r requirements.txt
 
 ### Basic Usage
 
-#### 1. Text-based Chat (Quick Test)
+#### 1. Quick Start with Example Knowledge Base
+
+The repository includes an example knowledge base to get you started immediately:
+
+```python
+from voice_chat_bot import VoiceChatBot
+
+# Initialize bot
+bot = VoiceChatBot()
+
+# Load the example knowledge base (included in the repository)
+bot.load_knowledge_base()
+
+# Try these example queries:
+print(bot.chat_text("What is the Voice Chat Bot?"))
+print(bot.chat_text("How does zero hallucination work?"))
+print(bot.chat_text("What are the system requirements?"))
+```
+
+The example knowledge base includes comprehensive documentation about the bot's features, technical specifications, usage guide, and FAQ.
+
+#### 2. Text-based Chat (Custom Knowledge)
 
 ```python
 from voice_chat_bot import VoiceChatBot
@@ -134,7 +155,7 @@ response = bot.chat_text("What is Python?")
 print(response)
 ```
 
-#### 2. Load Knowledge from Files
+#### 3. Load Knowledge from Your Own Files
 
 Create a file `knowledge_base/my_domain.txt`:
 ```
@@ -152,7 +173,7 @@ bot.load_knowledge_base("knowledge_base")
 response = bot.chat_text("Your question here")
 ```
 
-#### 3. Voice Interaction (Requires Microphone)
+#### 4. Voice Interaction (Requires Microphone)
 
 ```python
 from voice_chat_bot import VoiceChatBot

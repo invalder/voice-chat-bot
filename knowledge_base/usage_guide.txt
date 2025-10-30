@@ -1,0 +1,31 @@
+Voice Chat Bot Usage Guide
+
+Installation and Setup:
+To install the Voice Chat Bot, first clone the repository from GitHub. Create a virtual environment using python -m venv venv and activate it with source venv/bin/activate on Unix systems or venv\Scripts\activate on Windows. Install dependencies by running pip install -r requirements.txt. This will download and install all required packages including Whisper, ChromaDB, sentence-transformers, and pyttsx3.
+
+Basic Text Chat Usage:
+To use the bot in text mode, import the VoiceChatBot class from voice_chat_bot module. Create an instance with bot = VoiceChatBot(). Add knowledge using bot.add_knowledge("Your knowledge text here"). Query the bot with response = bot.chat_text("Your question here"). The bot will return a text response based on its knowledge base.
+
+Loading Knowledge from Files:
+Create a knowledge_base directory in your project root. Add text files with .txt extension containing your domain knowledge. Each file will be automatically chunked for optimal retrieval. Load the knowledge base using bot.load_knowledge_base(). The system will process all text files in the directory and add them to the vector database.
+
+Voice Interaction:
+For voice-based interaction, ensure you have a microphone connected. Initialize the bot and load your knowledge base. Use bot.chat_voice(duration=5) to record 5 seconds of audio and receive a spoken response. The duration parameter controls how long the microphone records. The bot will automatically transcribe your speech, process the query, and speak the response aloud.
+
+Custom Configuration:
+You can customize the bot by creating a VoiceChatBotConfig object. Set the expert_domain parameter to specify your domain, such as "medical", "legal", or "technical". Configure the knowledge_base_path to point to your knowledge directory. Adjust the stt.model_name to use different Whisper models for speed-accuracy tradeoffs. Set the tts.engine to choose between pyttsx3 for offline operation or gtts for online natural voices. Tune the rag.similarity_threshold to control how strict the matching should be, with higher values requiring closer matches.
+
+Creating Domain-Specific Bots:
+For a medical information bot, set expert_domain to "medical" and populate the knowledge base with medical literature. For a customer support bot, use FAQs and support documentation as knowledge sources. For a technical documentation helper, load API docs and user guides. For an educational tutor, include course materials and textbooks.
+
+Query Best Practices:
+Formulate clear and specific questions for best results. The bot performs better with focused queries rather than vague or overly broad questions. If the bot indicates it doesn't have information, try rephrasing your question or asking about related topics that may be in the knowledge base. Review the similarity threshold in your configuration if you're getting too many or too few results.
+
+Monitoring and Statistics:
+Use bot.get_stats() to retrieve information about your bot's configuration and knowledge base. This returns details including the expert domain, STT model, TTS engine, embedding model, and total number of documents in the knowledge base. This information helps you verify your setup and monitor the system's state.
+
+Updating Knowledge:
+You can add new knowledge at any time using the add_knowledge method. The new information is immediately available for queries. To add from files, use add_documents_from_file or reload the entire knowledge base directory. The vector database persists information across sessions, so you don't need to reload the knowledge base each time you start the bot.
+
+Troubleshooting:
+If you encounter "no module" errors, ensure all dependencies are installed with pip install -r requirements.txt. If the Whisper model doesn't download automatically, run import whisper followed by whisper.load_model("tiny") to download it manually. If audio devices aren't detected, you can use text-only mode by avoiding the voice methods and using chat_text instead. If TTS isn't working, try switching to the alternative engine in your configuration.

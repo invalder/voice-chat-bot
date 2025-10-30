@@ -5,10 +5,43 @@ from voice_chat_bot import VoiceChatBot
 from config import VoiceChatBotConfig
 
 
+def example_knowledge_base():
+    """Example using the included example knowledge base"""
+    print("=" * 60)
+    print("Example 1: Using the Example Knowledge Base")
+    print("=" * 60)
+    
+    # Initialize bot with default config
+    bot = VoiceChatBot()
+    
+    # Load the example knowledge base (included in the repository)
+    print("\nLoading example knowledge base...")
+    bot.load_knowledge_base()
+    
+    # Show stats
+    stats = bot.get_stats()
+    print(f"Loaded {stats['total_documents']} documents from knowledge base")
+    
+    # Query the bot about the Voice Chat Bot itself
+    queries = [
+        "What is the Voice Chat Bot?",
+        "How does zero hallucination work?",
+        "What are the system requirements?",
+        "Can the bot work offline?"
+    ]
+    
+    for query in queries:
+        print(f"\nQuery: {query}")
+        response = bot.chat_text(query)
+        # Show only first part of response for readability
+        preview = response[:200] + "..." if len(response) > 200 else response
+        print(f"Response: {preview}\n")
+
+
 def example_text_chat():
     """Example of text-based chat"""
     print("=" * 60)
-    print("Example 1: Text-based Chat")
+    print("Example 2: Text-based Chat with Custom Knowledge")
     print("=" * 60)
     
     # Initialize bot with default config
@@ -44,7 +77,7 @@ def example_text_chat():
 def example_custom_domain():
     """Example with custom expert domain"""
     print("=" * 60)
-    print("Example 2: Custom Expert Domain (Medical)")
+    print("Example 3: Custom Expert Domain (Medical)")
     print("=" * 60)
     
     # Create custom config
@@ -77,41 +110,45 @@ def example_custom_domain():
 
 
 def example_adding_from_file():
-    """Example of loading knowledge from files"""
+    """Example of adding custom knowledge from files"""
     print("=" * 60)
-    print("Example 3: Loading from Knowledge Base Files")
+    print("Example 4: Adding Custom Knowledge")
     print("=" * 60)
     
     import os
+    import tempfile
     
-    # Create knowledge base directory with sample file
-    kb_dir = "knowledge_base"
-    os.makedirs(kb_dir, exist_ok=True)
+    # Create a temporary directory for custom knowledge
+    temp_kb_dir = tempfile.mkdtemp(prefix="custom_kb_")
     
-    sample_file = os.path.join(kb_dir, "sample_knowledge.txt")
-    with open(sample_file, 'w') as f:
+    # Add a custom knowledge file
+    custom_file = os.path.join(temp_kb_dir, "custom_facts.txt")
+    with open(custom_file, 'w') as f:
         f.write("""
-Voice Chat Bot is an advanced conversational AI system designed with three key principles:
+Machine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed.
 
-1. Zero Hallucination: The bot only provides information from its knowledge base, ensuring 100% accuracy.
+Deep Learning is a type of machine learning based on artificial neural networks with multiple layers.
 
-2. Low Resource Consumption: Uses lightweight models (Whisper tiny for STT, efficient embeddings for RAG) to minimize memory and CPU usage.
-
-3. High Speed Response: Optimized for fast processing with minimal latency between query and response.
-
-The system uses Retrieval-Augmented Generation (RAG) to ground all responses in verified information, preventing the generation of false or misleading information.
+Natural Language Processing (NLP) is a branch of AI that helps computers understand, interpret and manipulate human language.
 """)
+    
+    print(f"\nCreated custom knowledge base in: {temp_kb_dir}")
     
     # Initialize and load
     config = VoiceChatBotConfig()
     bot = VoiceChatBot(config)
-    bot.load_knowledge_base(kb_dir)
+    bot.load_knowledge_base(temp_kb_dir)
     
     # Query
-    query = "What are the key principles of the Voice Chat Bot?"
+    query = "What is Machine Learning?"
     print(f"\nQuery: {query}")
     response = bot.chat_text(query)
     print(f"Response: {response}")
+    
+    # Cleanup
+    import shutil
+    shutil.rmtree(temp_kb_dir)
+    print(f"\n(Cleaned up temporary directory)")
 
 
 if __name__ == "__main__":
@@ -120,6 +157,10 @@ if __name__ == "__main__":
     print("=" * 60 + "\n")
     
     try:
+        # Start with the example knowledge base
+        example_knowledge_base()
+        print("\n" + "=" * 60 + "\n")
+        
         example_text_chat()
         print("\n" + "=" * 60 + "\n")
         

@@ -1,0 +1,43 @@
+Voice Chat Bot Frequently Asked Questions
+
+What is the Voice Chat Bot?
+The Voice Chat Bot is a conversational AI system that provides accurate voice-based question answering with zero hallucination. It uses Retrieval-Augmented Generation to ensure all responses come from verified knowledge sources.
+
+How does the zero hallucination guarantee work?
+The system uses RAG (Retrieval-Augmented Generation) which means it only generates responses based on information actually present in its knowledge base. When you ask a question, the bot searches its vector database for relevant documents. It only provides answers based on retrieved information. If no relevant information is found, the bot explicitly states it doesn't have the answer rather than making something up.
+
+What hardware do I need to run this bot?
+You need a computer with at least 512MB of free RAM, though 1GB is recommended. A CPU from the last 5 years should work fine - no GPU is required. A microphone is optional and only needed if you want to use voice input. Speakers or headphones are optional for voice output. The system works on Windows, macOS, and Linux.
+
+Can the bot work offline?
+Yes, the bot can operate completely offline. The Whisper model runs locally on your machine. The sentence-transformers model for embeddings is also local. ChromaDB stores data locally. When using the pyttsx3 TTS engine, no internet connection is needed. However, if you choose to use the gTTS engine for text-to-speech, an internet connection is required for that component only.
+
+What languages are supported?
+The Whisper speech-to-text model supports multiple languages including English, Spanish, French, German, Italian, Portuguese, Dutch, Russian, Chinese, Japanese, Korean, and many others. You can configure the language in the config.yaml file by setting the stt.language parameter to the appropriate language code.
+
+How accurate is the speech recognition?
+The accuracy depends on the Whisper model size you choose. The tiny model provides good accuracy for clear speech with minimal background noise. The base model offers improved accuracy. Larger models provide even better accuracy at the cost of slower processing. Audio quality, accent, and background noise all affect recognition accuracy.
+
+How do I add my own knowledge to the bot?
+There are two main ways. First, you can use the add_knowledge method to programmatically add text directly. Second, you can create text files in the knowledge_base directory and load them using load_knowledge_base. The system automatically chunks the documents and stores them in the vector database for efficient retrieval.
+
+What format should my knowledge files be in?
+Knowledge files should be plain text files with a .txt extension. The content should be clear and well-structured. The system will automatically split long documents into chunks. You can include multiple topics in one file or separate them into different files. Markdown formatting is not required but plain text paragraphs work best.
+
+How much knowledge can the bot store?
+The system can handle thousands of documents depending on available disk space and RAM. The ChromaDB vector database scales well for typical use cases. Very large knowledge bases may require more memory and slightly longer retrieval times. For optimal performance with very large knowledge bases, consider increasing the chunk_size and adjusting the top_k parameters.
+
+Can I use this bot for production applications?
+Yes, the bot is designed to be production-ready. It provides consistent, accurate responses based on your knowledge base. The modular architecture makes it easy to customize and extend. You have complete control over the knowledge and can ensure compliance with your requirements. Consider the speed-accuracy tradeoffs when choosing model sizes for production use.
+
+How do I update the knowledge base?
+You can add new knowledge at any time using add_knowledge or by adding new text files to the knowledge_base directory and reloading. The vector database persists across sessions, so previously added knowledge remains available. To remove old knowledge, you can clear the collection using the RAG system's clear_collection method and reload with updated information.
+
+What if the bot gives incorrect answers?
+If the bot provides incorrect information, it means the wrong information is in your knowledge base. Review and correct the source documents in your knowledge_base directory. The bot will only ever return information from its knowledge base, so ensuring the accuracy of source documents is crucial. The bot won't add or modify information - it only retrieves what you've provided.
+
+Can multiple bots run with different knowledge bases?
+Yes, you can create multiple bot instances with different configurations and knowledge bases. Use different chroma_db_path values for each bot to keep their vector databases separate. Set different expert_domain values to distinguish between different bot purposes. This allows you to have specialized bots for different domains running simultaneously.
+
+How private is my data?
+Your data is completely private. All processing happens locally on your machine. No data is sent to external servers unless you specifically choose to use the gTTS online text-to-speech engine. The Whisper model, embeddings, vector database, and knowledge base all operate locally. You have complete control over your data and where it's stored.
